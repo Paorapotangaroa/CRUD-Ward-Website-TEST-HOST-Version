@@ -5,7 +5,7 @@
 
 //1)Create a server file called index.js
 //Create a constant to hold the value for the port we are listening on
-const listenPort = 3333;
+const port = process.env.PORT || 3333;
 
 //requires the express module
 let express = require("express");
@@ -28,18 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 //Allow file uploads
 app.use(fileUpload());
 //require the knex module and set it to access the PostgreSQL database
-let knex = require("knex")({
-    client: "pg",
-    connection: {
-        host: "localhost",
-        server: "PostgreSQL 12",
-        user: "postgres",
-        password: "R3m3mb3r",
-        database: "postgres",
-        port: 5432
-    },
-    useNullAsDefault: true
-});
+const knex = require(path.join(__dirname + '/knex/knex.js'));
 
 //Make the css and image files accessable when ejs files are rendered.
 app.use(express.static(__dirname + "/assets"));
