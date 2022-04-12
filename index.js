@@ -52,7 +52,7 @@ app.get("/Calendar", (req, res) => {
     //next 30 days
     knex("Announcements").where("date", "<=", moment().add(30, 'days').calendar()).andWhere("date", ">=", moment().subtract(1, 'days').calendar()).orderBy("date")
         .then(results => {
-            res.render("calendar", { announcement: results });
+            res.render("Calendar", { announcement: results });
         });
 });
 
