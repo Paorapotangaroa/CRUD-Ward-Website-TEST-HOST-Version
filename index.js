@@ -34,9 +34,9 @@ const knex = require(path.join(__dirname + '/knex/knex.js'));
 app.use(express.static(__dirname + "/assets"));
 
 //alerts user that the server is active and starts listening on the listen port 
-app.listen(listenPort, function() {
+app.listen(port, function() {
 
-    console.log("Listener active on port " + listenPort);
+    console.log("Listener active on port " + port);
 
 });
 
