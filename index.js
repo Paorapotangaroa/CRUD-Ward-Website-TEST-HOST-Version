@@ -170,7 +170,7 @@ app.post("/editAnnouncement", (req, res) => {
     });
 });
 
-app.get("/test", (req, res) => {
+app.get("/upload", (req, res) => {
     res.render("testFileUpload");
 });
 
@@ -184,9 +184,9 @@ app.post("/upload", (req, res) => {
 
     file.mv(imgPath, (err) => {
         if (err) {
-            return res.status(500).send(err);
+            res.redirect("/test");
         }
-        return res.send({ status: "success", path: imgPath });
+        res.render("newUpload", { imgPath: "img/" + file.name });
     });
 });
 

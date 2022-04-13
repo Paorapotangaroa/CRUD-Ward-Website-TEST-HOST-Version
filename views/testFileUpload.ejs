@@ -2,15 +2,27 @@
 <html>
 
 <head>
-    <title>Express File Upload</title>
+    <title>Upload an image</title>
 </head>
 
 <body>
-    <h1>Express File Upload</h1>
+    <h1>Select an image to upload</h1>
     <form method="POST" action="/upload" enctype="multipart/form-data">
         <input type="file" name="myFile" />
         <input type="submit" />
+        <input type="button" onclick="cancelUpload()" value="Cancel">
     </form>
+
+    <script>
+        function cancelUpload() {
+            let sure = confirm("Are you sure you want to cancel the upload?");
+            if (sure === true) {
+                window.location.href = "/manageAnnouncements"
+            } else {
+
+            }
+        }
+    </script>
 </body>
 
 </html>

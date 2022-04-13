@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>YSA 218th Ward - View All</title>
+    <title>YSA 218th Ward - New</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
     <script src="/js/custom.js"></script>
 </head>
 
-<body class="grad">
+<body class="grad" onload="initSample()">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -66,11 +66,15 @@
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="site-heading">
-                        <h1>Announcements</h1>
+                        <h2>New Announcement</h2>
+                        <div class="subheading" style="text-align: center;">
+                            <b><a class="actuallywhite" href="#Build">Build</a></b>
+                            <b>|</b>
+                            <b><a class="actuallywhite" href="#Sample">Preview</a></b>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </header>
 
@@ -78,61 +82,53 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <table class="table">
-                    <tr>
-                        <th>
 
-                            <input type="button" value="New" onclick="typeOfImg()">
+                <div style="border: 4px; border-color: black; border:solid; padding: 30px;">
+                    <h1 style="text-align: center;">- Build the Announcement -</h1>
+                    <form action="/createAnnouncement" method="post" onchange="refreshSample()" id="Build">
+                        <label for="title">Title:</label>
+                        <input type="text" name="title" id="title" value="Announcement Title"><br><br>
+                        <label for="date">Date:</label>
+                        <input type="datetime-local" name="date" id="date">
+                        <input type="hidden" id="dateAsString" name="dateAsString" value="">
+                        <br><br>
+                        <label for="details">Details:</label><br>
+                        <textarea id="details" name="details" rows="4" cols="50">Any details you put will go in the details section.</textarea><br><br>
+                        <label for="">Select Image:</label><br>
+                        <input type="radio" name="image" id="default" value="default">
+                        <label for="default">Default</label>
+                        <input type="radio" name="image" id="custom" value="custom" checked>
+                        <label for="imageLocation">Custom Image:</label>
+                        <input type="hidden" id="imageLocation" name="imageLocation" value="<%= imgPath%>">
+                        <br><br>
+                        <label for="imageOrientation">Image Alignment:</label>
+                        <select name="imageOrientation" id="imageOrientation">
+                            <option value="top">Top</option>
+                            <option value="center" selected>Center</option>
+                            <option value="bottom">Bottom</option>
+                        </select>
+                        <br>
+                        <input type="submit" value="Save">
+                    </form>
+                    <br>
+                    <form action="/manageAnnouncements" method="get">
+                        <input type="submit" value="Cancel">
+                    </form>
+                </div>
+                <br>
+                <h1 style="text-align: center;" id="Sample">- Preview Announcement -</h1>
+                <hr>
+                <div class="sampleAnnouncement">
+                    <div id="sampleImage" class="a1">
+                        <h1 class="center" id="sampleTitle">Announcement Title</h1>
 
-                        </th>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Details</th>
-                        <th>Date and Time</th>
-                        <th></th>
-                    </tr>
-                    <% for(let i=0;i<announcement.length;i++) { %>
-                        <tr>
-                            <td><input type="button" value="Edit" onclick="editStudent('<%= announcement[i].a_id%>')"></td>
-                            <td>
-                                <%=i+1%>
-                            </td>
-                            <td>
-                                <%= announcement[i].title  %>
-                            </td>
-                            <td>
-                                <%= announcement[i].details %>
-                            </td>
-                            <td>
-                                <%= announcement[i].dateAsString%>
-                            </td>
-                            <td><input type="button" value="Delete" onclick="mercyDelete('<%= announcement[i].a_id%>')"></td>
-                        </tr>
-                        <% }  %>
-                </table>
-
-                <script>
-                    function mercyDelete(a_id) {
-                        var ans = prompt("Are you sure you want to delete this announcement?", "N");
-                        if (ans.toLowerCase() === 'y') {
-                            window.location.href = "/delete/" + a_id;
-                        }
-                    }
-
-                    function editStudent(a_id) {
-                        window.location.href = "/editAnnouncement/" + a_id;
-                    }
-
-                    function typeOfImg() {
-                        let imageType = confirm("Upload an Image or use one from the web(or a default)?\n" +
-                            "\n\"OK\" to upload a file \n\n \"Cancel\" to use a default image or an image from the web\n");
-                        if (imageType == true) {
-                            window.location.href = "/upload";
-                        } else {
-                            window.location.href = "/createAnnouncement";
-                        }
-                    }
-                </script>
+                        <hr>
+                    </div>
+                    <ul class="">
+                        <li id="sampleDate">The date and time will go here</li>
+                        <li id="sampleDetails">Any details you put will go here.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
