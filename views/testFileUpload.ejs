@@ -8,7 +8,7 @@
 <body>
     <h1>Select an image to upload</h1>
     <form method="POST" action="/upload" enctype="multipart/form-data">
-        <input type="file" name="myFile" />
+        <input type="file" name="myFile" accept=".tif, .tiff,.bmp,.jpg, .jpeg,.gif,.png,.eps,.raw, .cr2, .nef, .orf, .sr2" />
         <input type="submit" />
         <input type="button" onclick="cancelUpload()" value="Cancel">
     </form>
