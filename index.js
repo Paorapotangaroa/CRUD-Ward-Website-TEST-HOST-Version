@@ -114,7 +114,7 @@ app.post("/createAnnouncement", (req, res) => {
     }).catch(err => {
         //same as all the other errors
         console.log(err);
-        res.status(500).json({ err });
+        res.redirect("/login");
     });
 });
 
@@ -147,7 +147,7 @@ app.get("/editAnnouncement/:a_id", (req, res) => {
                 res.render('editAnnouncement', { announcement: announcementInfo });
             }).catch(err => {
                 console.log(err);
-                res.status(500).json({ err });
+                res.redirect("/login");
             });
     } else {
         res.redirect("/login");
@@ -191,7 +191,7 @@ app.post("/editAnnouncement", (req, res) => {
     }).catch(err => {
         //same as all the other errors
         console.log(err);
-        res.status(500).json({ err });
+        res.redirect("/login")
     });
 });
 
