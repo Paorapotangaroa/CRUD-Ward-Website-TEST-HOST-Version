@@ -5,6 +5,9 @@
 
 //1)Create a server file called index.js
 //Create a constant to hold the value for the port we are listening on
+let allowedUsers = ["toa.pita"];
+let passwords = ["R3m3mb3r"];
+let loginTime;
 const port = process.env.PORT || 3333;
 
 //requires the express module
@@ -40,6 +43,8 @@ app.listen(port, function() {
 
 });
 
+let authUser = false;
+
 app.get("/", (req, res) => {
     //announcements within 7 daysd
     knex("Announcements").where("date", "<=", moment().add(7, 'days').calendar()).andWhere("date", ">=", moment().subtract(1, 'days').calendar()).orderBy("date")
@@ -59,7 +64,17 @@ app.get("/Calendar", (req, res) => {
 
 //Create a new annoucement
 app.get("/createAnnouncement", (req, res) => {
-    res.render("createAnnouncement")
+    if (authUser) {
+        res.render("createAnnouncement")
+
+    } else {
+        res.redirect("/login");
+    }
+});
+
+app.get("/logout", (req, res) => {
+    authUser = false;
+    res.redirect("/");
 });
 
 app.post("/createAnnouncement", (req, res) => {
@@ -104,29 +119,39 @@ app.post("/createAnnouncement", (req, res) => {
 });
 
 app.get("/manageAnnouncements", (req, res) => {
-    knex("Announcements").orderBy("date")
-        .then(results => {
-            res.render("listAnnouncements", { announcement: results });
-        });
+    if (authUser) {
+        knex("Announcements").orderBy("date")
+            .then(results => {
+                res.render("listAnnouncements", { announcement: results });
+            });
+    } else {
+        res.redirect("/login");
+    }
 });
 
 app.get("/delete/:a_id", (req, res) => {
-    knex("Announcements").where('a_id', req.params.a_id).del()
-        .then(delResult => {
-            res.redirect("/manageAnnouncements");
-        });
+    if (authUser) {
+        knex("Announcements").where('a_id', req.params.a_id).del()
+            .then(delResult => {
+                res.redirect("/manageAnnouncements");
+            });
+    } else {
+        res.redirect("/login");
+    }
 });
 
 app.get("/editAnnouncement/:a_id", (req, res) => {
-
-    knex("Announcements").where("a_id", req.params.a_id)
-        .then(announcementInfo => {
-            res.render('editAnnouncement', { announcement: announcementInfo });
-        }).catch(err => {
-            console.log(err);
-            res.status(500).json({ err });
-        });
-
+    if (authUser) {
+        knex("Announcements").where("a_id", req.params.a_id)
+            .then(announcementInfo => {
+                res.render('editAnnouncement', { announcement: announcementInfo });
+            }).catch(err => {
+                console.log(err);
+                res.status(500).json({ err });
+            });
+    } else {
+        res.redirect("/login");
+    }
 });
 
 app.post("/editAnnouncement", (req, res) => {
@@ -171,7 +196,11 @@ app.post("/editAnnouncement", (req, res) => {
 });
 
 app.get("/upload", (req, res) => {
-    res.render("testFileUpload");
+    if (authUser) {
+        res.render("testFileUpload");
+    } else {
+        res.redirect("/login");
+    }
 });
 
 app.post("/upload", (req, res) => {
@@ -190,6 +219,49 @@ app.post("/upload", (req, res) => {
     });
 });
 
-app.get("/testing", (req, res) => {
-    res.render("Test");
-})
+app.get("/login", (req, res) => {
+    if (authUser) {
+        res.redirect("/manageAnnouncements")
+    } else {
+        res.render("sign-in");
+    }
+});
+
+app.post("/login", (req, res) => {
+
+    for (let i = 0; i < allowedUsers.length; i++) {
+        if (req.body.uname.toLowerCase() === allowedUsers[i].toLowerCase() && req.body.psw === passwords[i]) {
+            authUser = true;
+            loginTime = moment.now();
+            res.redirect("/manageAnnouncements");
+        } else {
+            authUser = false;
+            res.redirect("/login");
+        }
+    }
+
+});
+
+// class User {
+//     username;
+//     password;
+//     loginTime;
+//     loggedIn;
+//     constructor(pUsername,pPassword){
+//        this.username = pUsername;
+//         this.password = pPassword;
+//     }
+
+//     login(){
+//         this.loginTime = moment.now();
+//         this.loggedIn = true;
+//     }
+
+//     logout(){
+//         this.loginTime = "";
+//         this.loggedIn = false;
+//     }
+// }
+// let users = [];
+// let masterUser = new User("Barnes","Char1ty");
+// users.push(masterUser);

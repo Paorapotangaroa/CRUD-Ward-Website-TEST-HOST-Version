@@ -73,8 +73,18 @@
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="page-heading">
-                        <h1>Ward Calendar</h1>
-                        <span class="subheading">Come join us at some of our amazing activites</span>
+                        <form action="/login" method="post">
+
+                            <div class="container">
+                                <label for="uname"><b>Username</b></label>
+                                <input type="text" placeholder="Enter Username" name="uname" required>
+
+                                <label for="psw"><b>Password</b></label>
+                                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                                <button type="submit">Login</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -83,53 +93,13 @@
 
     <!-- Main Content -->
     <div class="container">
-        <!--<div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">-->
-        <% for(let i=0;i<announcement.length;i++) { %>
-            <div class="a1" style="background-image: url('<%=announcement[i].imageLocation%>') ; background-size: 100%; background-position: '<%=announcement[i].imageOrientation%>'; color: white; text-shadow: black 0.1em 0.1em 0.2em; list-style-type: none;">
-                <h1 class="center">
-                    <%= announcement[i].title %>
-                </h1>
-                <hr>
-            </div>
-            <ul class="">
 
-                <li>
-                    <%= announcement[i].dateAsString%>
-                </li>
-                <li>
-                    <%= announcement[i].details %>
-                </li>
-            </ul>
-            <% } %>
-                <!--</div>
-    </div>-->
     </div>
 
     <hr>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <ul class="list-inline text-center">
-                        <li class="list-inline-item">
-                            <a href="https://www.facebook.com/groups/provoysa218thward" target="_blank" class="white">
-                Facebook
-              </a>
-                        </li>
-                        <li class="list-inline-item">|</li>
-                        <li class="list-inline-item">
-                            <a href="https://www.instagram.com/provo_ysa_218th_ward/" target="_blank" class="white">
-                Instagram
-              </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+
 
     <!-- Bootstrap core JavaScript -->
     <script src="/vendor/jquery/jquery.min.js"></script>
