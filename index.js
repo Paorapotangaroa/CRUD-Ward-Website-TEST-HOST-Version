@@ -5,8 +5,8 @@
 
 //1)Create a server file called index.js
 //Create a constant to hold the value for the port we are listening on
-let allowedUsers = ["toa.pita", "jlocke"];
-let passwords = ["R3m3mb3r", "is303"];
+let allowedUsers = ["toa.pita", "jlocke", "sm"];
+let passwords = ["R3m3mb3r", "is303", "218&216"];
 let loginTime;
 const port = process.env.PORT || 3333;
 
@@ -230,13 +230,17 @@ app.get("/login", (req, res) => {
 app.post("/login", (req, res) => {
 
     for (let i = 0; i < allowedUsers.length; i++) {
+
         if (req.body.uname.toLowerCase() === allowedUsers[i].toLowerCase() && req.body.psw === passwords[i]) {
             authUser = true;
             loginTime = moment.now();
             res.redirect("/manageAnnouncements");
         } else {
-            res.redirect("/login");
+
         }
+    }
+    if (authUser == false) {
+        res.redirect("/login");
     }
 
 });
