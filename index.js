@@ -235,7 +235,6 @@ app.post("/login", (req, res) => {
             loginTime = moment.now();
             res.redirect("/manageAnnouncements");
         } else {
-            authUser = false;
             res.redirect("/login");
         }
     }

@@ -14,7 +14,9 @@ function refreshSample() {
         time = date[2].split("T");
         time = time[1].split(":");
 
-        if (parseInt(time[0]) >= 12) {
+        if (parseInt(time[0]) === 12) {
+            amPm = "PM";
+        } else if (parseInt(time[0]) > 12) {
             amPm = "PM";
             time[0] = time[0] - 12;
         }
