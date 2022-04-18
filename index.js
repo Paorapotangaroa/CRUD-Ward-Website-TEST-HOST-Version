@@ -28,6 +28,7 @@ app.set("view engine", "ejs")
 //Make it possible to access the body attribute using URL Encoding
 app.use(express.urlencoded({ extended: true }));
 
+
 //Allow file uploads
 app.use(fileUpload());
 //require the knex module and set it to access the PostgreSQL database
