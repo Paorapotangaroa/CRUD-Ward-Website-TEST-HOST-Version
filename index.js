@@ -51,6 +51,7 @@ app.get("/", (req, res) => {
     knex("Announcements").where("date", "<=", moment().add(7, 'days').calendar()).andWhere("date", ">=", moment().subtract(1, 'days').calendar()).orderBy("date")
         .then(results => {
             res.render("index", { announcement: results });
+            // console.log(results[0].imageOrientation);
         });
 });
 

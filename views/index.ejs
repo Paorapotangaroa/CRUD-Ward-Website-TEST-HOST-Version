@@ -101,11 +101,10 @@
                     <li><a class="white" href="https://forms.gle/JrSrsGnPUAA85ozLA" target="_blank" class="nav-link">Move-out form</a></li>
                 </ul>
                 <% for(let i=0;i<announcement.length;i++) { %>
-                    <div class="a1" style="background-image: url('<%=announcement[i].imageLocation%>') ; background-size: 100%; background-position: '<%=announcement[i].imageOrientation%>'; color: white; text-shadow: black 0.1em 0.1em 0.2em; list-style-type: none;">
+                    <div style="background-image: url('<%=announcement[i].imageLocation%>') ; background-size: 100%; background-position:<%=announcement[i].imageOrientation%>; color: white; text-shadow: black 0.1em 0.1em 0.2em; list-style-type: none;">
                         <h1 class="center">
                             <%= announcement[i].title %>
                         </h1>
-                        <hr>
                     </div>
                     <ul class="">
                         <li>
