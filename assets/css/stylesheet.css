@@ -221,6 +221,15 @@ hr.new5 {
     list-style-type: none;
 }
 
+.temple {
+    background-image: url("../img/colonia-juarez-chihuahua-mexico-temple-1567750-wallpaper.jpg");
+    background-size: 100%;
+    background-position: top;
+    color: white;
+    text-shadow: black 0.3em 0.3em 0.6em;
+    list-style-type: none;
+}
+
 .a4 {
     background-image: url("../img/garland_tabernacle_pews.jpeg");
     background-size: 100%;
