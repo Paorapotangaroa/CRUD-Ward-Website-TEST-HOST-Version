@@ -5,8 +5,8 @@
 
 //1)Create a server file called index.js
 //Create a constant to hold the value for the port we are listening on
-let allowedUsers = ["toa.pita", "jlocke", "sm"];
-let passwords = ["R3m3mb3r", "is303", "218&216"];
+let allowedUsers = ["toa.pita", "jlocke", "sm", "wp", "sunAct", "weekAct"];
+let passwords = ["R3m3mb3r", "is303", "218&216", "Sun8pm", "sabbath", "FHE"];
 let loginTime;
 const port = process.env.PORT || 3333;
 
